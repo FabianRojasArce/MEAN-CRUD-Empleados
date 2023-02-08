@@ -1,8 +1,8 @@
 import * as mongodb from "mongodb";
  
 export interface Employee {
-   nombre: string;
-   puesto: string;
-   nivel: "junior" | "mid" | "senior";
+   name: string;
+   position: string;
+   level: "junior" | "mid" | "senior";
    _id?: mongodb.ObjectId;
 }
