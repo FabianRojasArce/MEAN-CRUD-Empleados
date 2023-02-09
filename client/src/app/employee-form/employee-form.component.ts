@@ -103,11 +103,12 @@ export class EmployeeFormComponent implements OnInit {
  get name() { return this.employeeForm.get('name')!; }
  get position() { return this.employeeForm.get('position')!; }
  get level() { return this.employeeForm.get('level')!; }
+ validForm = true
  
  ngOnInit() {
    this.initialState.subscribe(employee => {
      this.employeeForm = this.fb.group({
-       name: [ employee.name, [Validators.required] ],
+       name: [ employee.name, [Validators.required, Validators.minLength(3)] ],
        position: [ employee.position, [ Validators.required, Validators.minLength(5) ] ],
        level: [ employee.level, [Validators.required] ]
      });
@@ -117,6 +118,11 @@ export class EmployeeFormComponent implements OnInit {
  }
  
  submitForm() {
+  if (this.employeeForm.status === 'VALID') {
     this.formSubmitted.emit(this.employeeForm.value);
+    this.validForm = true
+  }else{
+    this.validForm = false
+  }
  }
 }
