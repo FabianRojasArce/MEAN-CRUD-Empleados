@@ -6,54 +6,77 @@ import { Employee } from '../employee';
 @Component({
  selector: 'app-employee-form',
  template: `
-   <form class="employee-form" autocomplete="off" [formGroup]="employeeForm" (ngSubmit)="submitForm()">
-     <div class="form-floating mb-3">
-       <input class="form-control" type="text" id="name" formControlName="name" placeholder="Name" required>
-       <label for="name">Name</label>
-     </div>
- 
-     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-       <div *ngIf="name.errors?.['required']">
-         Name is required.
-       </div>
-       <div *ngIf="name.errors?.['minlength']">
-         Name must be at least 3 characters long.
-       </div>
-     </div>
- 
-     <div class="form-floating mb-3">
-       <input class="form-control" type="text" formControlName="position" placeholder="Position" required>
-       <label for="position">Position</label>
-     </div>
- 
-     <div *ngIf="position.invalid && (position.dirty || position.touched)" class="alert alert-danger">
- 
-       <div *ngIf="position.errors?.['required']">
-         Position is required.
-       </div>
-       <div *ngIf="position.errors?.['minlength']">
-         Position must be at least 5 characters long.
-       </div>
-     </div>
- 
-     <div class="mb-3">
-       <div class="form-check">
-         <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-junior" value="junior" required>
-         <label class="form-check-label" for="level-junior">Junior</label>
-       </div>
-       <div class="form-check">
-         <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-mid" value="mid">
-         <label class="form-check-label" for="level-mid">Mid</label>
-       </div>
-       <div class="form-check">
-         <input class="form-check-input" type="radio" formControlName="level" name="level" id="level-senior"
-           value="senior">
-         <label class="form-check-label" for="level-senior">Senior</label>
-       </div>
-     </div>
- 
-     <button class="btn btn-primary" type="submit" [disabled]="employeeForm.invalid">Add</button>
-   </form>
+ <div class="m-32 md:col-span-2 md:mt-0 ">
+      <form class="employee-form" autocomplete="off" [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+        <div class="overflow-hidden shadow sm:rounded-md">
+          <div class="bg-gray-50 dark:bg-gray-600  px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-slate-200">Name</label>
+                <input type="text" formControlName="name" placeholder="Name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                
+
+                
+                <div *ngIf="!validForm" class="text-red-600 dark:text-red-500">
+                  <div *ngIf="name.errors?.['required']">
+                    Name is required.
+                  </div>
+                  <div *ngIf="name.errors?.['minlength']">
+                    Name must be at least 3 characters long.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="position" class="block text-sm font-medium text-gray-700 dark:text-slate-200">Position</label>
+                <input type="text" formControlName="position" placeholder="Position" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                
+                <div *ngIf="!validForm && (position.errors?.['required'] || position.errors?.['minlength'])" class="text-red-600 dark:text-red-500">
+                  <div *ngIf="position.errors?.['required']">
+                    Position is required.
+                  </div>
+                  <div *ngIf="position.errors?.['minlength']">
+                    Position must be at least 3 characters long.
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="flex-col-reverse text-gray-700 dark:text-slate-200">
+                  <label  class="block text-sm font-medium">Level</label>
+                  <label class="inline-flex items-center">
+                    <input class="form-radio" type="radio" formControlName="level" name="level" id="level-junior" value="junior" required>
+                    <span class="ml-2" for="level-junior">Junior</span>
+                  </label>
+
+                  <label class="inline-flex items-center">
+                    <input class="form-radio" type="radio" formControlName="level" name="level" id="level-mid" value="mid" required>
+                    <span class="ml-2" for="level-mid">Mid</span>
+                  </label>
+                  
+                  <label class="inline-flex items-center">
+                    <input class="form-radio" type="radio" formControlName="level" name="level" id="level-senior" value="senior" required>
+                    <span class="ml-2" for="level-senior">Senior</span>
+                  </label>
+
+                  <div *ngIf="!validForm && (level.errors?.['required'])" class="text-red-600 flex-nowrap dark:text-red-500">
+                    <div *ngIf="level.errors?.['required']">
+                      level is required.
+                    </div>
+                    <div *ngIf="level.errors?.['minlength']">
+                      level must be at least 3 characters long.
+                    </div>
+                  </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-500 text-right sm:px-6">
+            <button class="self-end m-3 bg-sky-400 text-white dark:bg-sky-800 px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer" type="submit">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
  `,
  styles: [
    `.employee-form {
@@ -94,6 +117,6 @@ export class EmployeeFormComponent implements OnInit {
  }
  
  submitForm() {
-   this.formSubmitted.emit(this.employeeForm.value);
+    this.formSubmitted.emit(this.employeeForm.value);
  }
 }

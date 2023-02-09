@@ -7,7 +7,7 @@ import { EmployeeService } from '../employee.service';
 @Component({
  selector: 'app-edit-employee.component.ts',
  template: `
-   <h2 class="text-center m-5">Edit an Employee</h2>
+   <h2 class="m-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-slate-200">Edit an Employee</h2>
    <app-employee-form [initialState]="employee" (formSubmitted)="editEmployee($event)"></app-employee-form>
  `
 })
