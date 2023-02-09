@@ -36,7 +36,7 @@ import { Employee } from '../employee';
                     Position is required.
                   </div>
                   <div *ngIf="position.errors?.['minlength']">
-                    Position must be at least 3 characters long.
+                    Position must be at least 5 characters long.
                   </div>
                 </div>
               </div>
