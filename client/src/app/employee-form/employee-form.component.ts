@@ -59,19 +59,16 @@ import { Employee } from '../employee';
                     <span class="ml-2" for="level-senior">Senior</span>
                   </label>
 
-                  <div *ngIf="!validForm && (level.errors?.['required'])" class="text-red-600 flex-nowrap dark:text-red-500">
+                  <div *ngIf="!validForm && (level.errors?.['required'])" class="w-32 text-red-600 dark:text-red-500">
                     <div *ngIf="level.errors?.['required']">
-                      level is required.
-                    </div>
-                    <div *ngIf="level.errors?.['minlength']">
-                      level must be at least 3 characters long.
-                    </div>
+                      Level is required.
+                    </div>  
                   </div>
               </div>
               
             </div>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-500 text-right sm:px-6">
+          <div class="bg-gray-100 dark:bg-gray-500 text-right sm:px-6">
             <button class="self-end m-3 bg-sky-400 text-white dark:bg-sky-800 px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer" type="submit">Add</button>
           </div>
         </div>
